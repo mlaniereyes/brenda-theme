@@ -2,26 +2,26 @@
   {% capture image_layout %}
     <div class="feature-row__item">
       {% if section.settings.image != blank %}
-        {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
-        {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+        <noscript>
+          {{ section.settings.image | img_url: '640x640' | img_tag: section.settings.image.alt }}
+        </noscript>
+
+        {% capture img_id %}FeatureRowImage--{{ section.id }}{% endcapture %}
+        {% capture img_wrapper_id %}FeatureRowImageWrapper--{{ section.id }}{% endcapture %}
+        {% include 'image-style' with image: section.settings.image, width: 700, height: 640, wrapper_id: img_wrapper_id, img_id: img_id %}
         {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-        {% include 'image-style', image: section.settings.image, height: 545, wrapper_id: wrapper_id, img_id: img_id %}
-        <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+        <div id="{{ img_wrapper_id }}" class="feature-row__image-wrapper supports-js">
           <div style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;">
             <img id="{{ img_id }}"
                  class="feature-row__image lazyload"
-                 src="{{ section.settings.image | img_url: '200x200' }}"
+                 src="{{ section.settings.image | img_url: '300x300' }}"
                  data-src="{{ img_url }}"
-                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
                  data-aspectratio="{{ section.settings.image.aspect_ratio }}"
                  data-sizes="auto"
                  alt="{{ section.settings.image.alt | escape }}">
           </div>
         </div>
-
-        <noscript>
-          {{ section.settings.image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
-        </noscript>
       {% else %}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
       {% endif %}
@@ -35,27 +35,14 @@
 
     <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout }}">
       {% if section.settings.title != blank %}
-        <h2 class="h3">{{ section.settings.title | escape }}</h2>
+        <h2>{{ section.settings.title | escape }}</h2>
       {% endif %}
       {% if section.settings.text != blank %}
-        <div class="rte rte-setting featured-row__subtext">{{ section.settings.text }}</div>
+        <div class="rte featured-row__subtext">{{ section.settings.text }}</div>
       {% endif %}
       {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-        {%- capture ariaLabel -%}
-          {{- section.settings.button_label -}}
-          {%- if section.settings.button_link.type == 'frontpage_link' -%}
-            : {{ 'homepage.general.title' | t -}}
-          {%- elsif section.settings.button_link.type == 'catalog_link' -%}
-            : {{ 'collections.catalog.title' | t -}}
-          {%- elsif section.settings.button_link.object.title -%}
-            : {{ section.settings.button_link.object.title -}}
-          {%- endif -%}
-        {%- endcapture -%}
-
-        <a href="{{ section.settings.button_link }}"
-          class="btn"
-          aria-label="{{ ariaLabel }}">
-          {{- section.settings.button_label | escape -}}
+        <a href="{{ section.settings.button_link }}" class="btn">
+          {{ section.settings.button_label | escape }}
         </a>
       {% endif %}
     </div>
@@ -198,7 +185,7 @@
         "en": "Heading",
         "es": "Título",
         "fi": "Otsake",
-        "fr": "En-tête",
+        "fr": "Titre",
         "hi": "शीर्षक",
         "it": "Heading",
         "ja": "見出し",
@@ -269,7 +256,7 @@
         "ko": "<p>이미지와 큰 텍스트를 짝지어 선택한 제품, 컬렉션, 블로그 게시판을 강조합니다. 사용 가능성, 스타일에 대한 자세한 정보를 추가하거나 리뷰를 제공합니다.</p>",
         "nb": "<p>Koble stor tekst med et bilde for å drive fokus mot det valgte produktet, samlingen eller blogginnlegget. Legg til detaljer om tilgjengelighet, stil eller vis frem en vurdering.</p>",
         "nl": "<p>Plaats een afbeelding bij grote stukken tekst om de aandacht op uw gekozen product, collectie of blogpost te richten. Voeg details over beschikbaarheid en stijl toe of plaats een productrecensie.</p>",
-        "pt-BR": "<p>Emparelhe textos grandes com uma imagem para destacar o produto, a coleção ou o post do blog escolhido. Adicione informações sobre disponibilidade, estilo ou até mesmo uma avaliação.</p>",
+        "pt-BR": "<p>Emparelhe textos grandes com uma imagem para dar foco ao produto, coleção ou post do blog escolhido. Adicione detalhes sobre disponibilidade, estilo ou até mesmo um comentário.</p>",
         "pt-PT": "<p>Associe um texto grande a uma imagem para dar ênfase ao produto, coleção ou publicação no blogue que escolheu. Adicione detalhes sobre disponibilidade, estilo ou uma avaliação.</p>",
         "sv": "<p>Para ihop stor text med en bild för att ge fokus åt din valda produkt, kollektion eller blogginlägg. Lägg till information om tillgänglighet, stil eller tillhandahåll till och med en recension.</p>",
         "th": "<p>จับคู่ข้อความขนาดใหญ่กับรูปภาพเพื่อให้ความสำคัญกับสินค้า คอลเลกชัน หรือโพสต์บล็อกที่คุณเลือก เพิ่มรายละเอียดเกี่ยวกับความพร้อม สไตล์ หรือแม้กระทั่งเขียนรีวิว</p>",

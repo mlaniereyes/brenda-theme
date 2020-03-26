@@ -1,110 +1,91 @@
-{% paginate search.results by 10 %}
+{% comment %}
 
-<div class="page-width">
-  {% if search.performed == false %}
-    <div class="text-center">
-      <h1 class="h2">{{ 'general.search.title' | t }}</h1>
-  {% else %}
-    <div class="text-center">
-      <h1 class="h2">
-        <span class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}:</span>
-        {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
-      </h1>
-  {% endif %}
-      <div class="grid">
-        <div class="grid__item medium-up--six-tenths medium-up--push-two-tenths">
-          {% if search.performed and search.results_count == 0 %}
-            <div class="rte search--no-results-found">
-              <p>{{ 'general.search.no_results' | t }}</p>
-            </div>
-          {% endif %}
-          <form action="{{ routes.search_url }}" method="get" role="search" class="search-form search-page-form">
-            <div class="input-group input-group--nowrap">
-              <div class="input-group__field input-group__field--connected search-form__input-wrapper">
-                <input
-                  type="search"
-                  name="q"
-                  value="{{ search.terms | escape }}"
-                  placeholder="{{ 'general.search.placeholder' | t }}"
-                  role="combobox"
-                  aria-autocomplete="list"
-                  aria-owns="predictive-search-results"
-                  aria-expanded="false"
-                  aria-label="{{ 'general.search.placeholder' | t }}"
-                  aria-haspopup="listbox"
-                  class="search-form__input"
-                  data-search-page-predictive-search-input
-                />
+  The {{ content_for_header }} in theme.liquid will output the following stylesheet just for this page:
+    - <link rel="stylesheet" href="/global/search.css" type="text/css">
 
-                <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+  It has a few helpers in there, but this theme writes its own styles so there
+  are no dependencies or conflicts. You can ignore that file.
 
-                <button type="reset" class="search-form__clear-action" aria-label="{{ 'general.search.clear_search_term' | t }}" data-search-page-predictive-search-clear>
-                  {% include 'icon-close' %}
-                </button>
+  Return only products or pages in results:
+    - http://docs.shopify.com/manual/configuration/store-customization/return-only-product-in-storefront-search-results
+    - Or manually add type=product or type=page to the search URL as a parameter
 
-                <div class="predictive-search-wrapper" data-predictive-search-mount="default"></div>
-              </div>
+{% endcomment %}
 
-              <button type="submit" class="search-form__connected-submit" aria-label="{{ 'general.search.submit' | t }}" data-search-page-predictive-search-submit>
-                {% include 'icon-search' %}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-  </div>
-</div>
-
+{% comment %}
+  If you're only showing products with the method above, why not show them off in a grid instead?
+  Set grid_results to true and see your updated results page for the new layout.
+{% endcomment %}
+{% assign grid_results = false %}
 
 {% if search.performed %}
-  {% if search.results_count > 0 %}
-    <hr aria-hidden="true" />
-  {% endif %}
 
-  <h2 class="visually-hidden">{{ 'general.search.heading' | t: count: search.results_count }}</h2>
+  {% comment %}
+    Avoid accessing search.results before the opening paginate tag.
+    If you do, the pagination of results will be broken.
+  {% endcomment %}
+  {% paginate search.results by 10 %}
 
-  <ul class="page-width list-view-items">
-    {% for item in search.results %}
-      <li class="list-view-item">
-        {% if item.object_type == 'product' %}
-          {% include 'product-card-list', product: item %}
-        {% else %}
-          <div class="product-card product-card--list">
-            <a href="{{ item.url }}" class="full-width-link">
-              <span class="visually-hidden">{{ item.title }}</span>
-            </a>
-            <div class="list-view-item__link">
-              <div class="list-view-item__image-column">
-                <div class="list-view-item__image-wrapper product-card__image-wrapper">
-                  {% unless item.image == null %}
-                    <img class="list-view-item__image" src="{{ item.image.src | img_url: '600x600' }}" alt="{{ item.image.alt | escape }}">
-                  {% endunless %}
-                </div>
-              </div>
+    {% comment %}
+      We don't have any results to show. Feel free to show off featured products
+      or suggested searches here.
+    {% endcomment %}
+    {% if search.results_count == 0 %}
 
-              <div class="list-view-item__title-column">
-                <div class="list-view-item__title" aria-hidden="true">
-                  <span class="product-card__title">{{ item.title }}</span>
-                </div>
-                <div>
-                  {% if item.published_at %}{{ item.published_at | date: format: "date" }} &#8212; {% endif %}
-                  {{ item.content | strip_html | truncate: 200 }}
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+      <div class="section-header section-header--large">
+        <h1 class="section-header__title h2">{{ 'general.search.no_results_html' | t: terms: search.terms }}</h1>
+      </div>
+      {% include 'search-bar' %}
 
-  {%- if paginate.pages > 1 -%}
-    {% include 'pagination', paginate: paginate %}
-  {%- endif -%}
+    {% else %}
+
+      <div class="section-header section-header--large">
+        <h1 class="section-header__title h2">{{ 'general.search.results_for_html' | t: terms: search.terms }}</h1>
+      </div>
+      {% include 'search-bar' %}
+
+      {% comment %}
+        Each result template, based on the grid_layout variable above
+      {% endcomment %}
+      {% if grid_results == false %}
+
+        <hr>
+        {% for item in search.results %}
+          {% include 'search-result' %}
+          <hr>
+        {% endfor %}
+
+      {% else %}
+
+        <div class="grid-uniform">
+          {% for item in search.results %}
+            {% assign grid_item_width = 'post-large--one-quarter medium--one-third small--one-half' %}
+            {% include 'search-result-grid' %}
+          {% endfor %}
+        </div>
+
+      {% endif %}
+
+    {% endif %}
+
+    {% if paginate.pages > 1 %}
+      <div class="text-center">
+        {% include 'pagination-custom' %}
+      </div>
+    {% endif %}
+
+  {% endpaginate %}
+
+{% else %}
+
+  {% comment %}
+    If search.performed is false, someone either accessed the page without
+    the q parameter, or it was blank.
+    Be sure to show a search form here, along with anything else you want to showcase.
+  {% endcomment %}
+  <div class="section-header section-header--large">
+    <h1 class="section-header__title h2">{{ 'general.search.title' | t }}</h1>
+  </div>
+  {% include 'search-bar' %}
+
 {% endif %}
-
-{% if search.results_count < 2  %}
-  <div class="search--less-than-2-results"></div>
-{% endif %}
-
-{% endpaginate %}
