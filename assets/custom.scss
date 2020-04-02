@@ -1,0 +1,178 @@
+* {
+  font-family: "overlock";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: black;
+}
+
+// detect home page only, don't need to create a class
+.template-index [data-section-id="header"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.homepage-top-banner {
+  background-color: #2b9fcd;
+  color: white;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-bottom: -2px;
+  padding-top: 10px;
+}
+
+.template-index .site-header .grid--full {
+  border-bottom: 0;
+}
+/* home page video part */
+.section1 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 200px 0;
+  flex-direction: column;
+}
+
+.home-section1-title {
+  flex: 1 1 100%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 50px;
+  max-width: 500px;
+  margin: 0 auto;
+  font-style: italic;
+  color: white;
+  margin-bottom: 44px;
+  margin-top: 160px;
+  text-transform: capitalize;
+}
+
+.home-shopping-btn {
+  background-color: white;
+  color: #2b9fcd;
+  font-family: Nunito;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: lowercase;
+  text-align: center;
+  letter-spacing: 0.1em;
+  border: 2px solid #2b9fcd;
+  border-radius: 10px;
+}
+
+.home-shopping-btn:hover {
+  background-color: #2b9fcd !important;
+  color: white;
+}
+.home-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.index-section.video {
+  padding-top: 0;
+  margin: 0 calc(50% - 50vw);
+}
+
+/* section2  DRESSES & SKIRTS */
+.section2 .container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.section2-vol1 {
+  text-align: center;
+  width: 100%;
+}
+.section2-vol2 {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.section2-item-main-title {
+  display: none;
+}
+.section2-vol2-item {
+  flex: 1 1 25%;
+  max-width: 320px;
+  align-items: center;
+  padding: 25px; // give space for each item
+}
+.section2-discription {
+  margin-bottom: 67px;
+  margin-top: 45px;
+}
+.section2-title {
+  margin-top: 107px;
+  background-color: #f7f6c5;
+  padding-top: 55px;
+  padding-bottom: 22px;
+  max-width: 1170px;
+  padding-left: 100px;
+}
+.section2-item-sub-title {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-top: 26px;
+}
+.section2-product-price {
+  text-align: center;
+}
+
+.section2-image {
+  width: 100%;
+}
+/* section3  Collections */
+.section3 .container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.section3-title {
+  width: 100%;
+  text-align: center;
+  margin-top: 107px;
+  background-color: #f7f6c5;
+  padding-top: 55px;
+  padding-bottom: 22px;
+  max-width: 1170px;
+  padding-left: 100px;
+  margin-bottom: 72px;
+}
+
+.section3-col {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.section3-col-item {
+  flex: 1 1 33%;
+  min-width: 400px;
+  padding: 30px;
+  position: relative;
+}
+.section3-image {
+  width: 100%;
+}
+
+.section3-sub-title {
+  // this part can make text in the middle of picture instead of using flex
+  // parent should be relative
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-bottom: 0;
+  line-height: 1em;
+  color: white;
+  font-size: 40px;
+}

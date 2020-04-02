@@ -1,0 +1,42 @@
+{% for block in section.blocks %}
+
+
+{% schema %}
+{
+  "name": "blog",
+  "class": "blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "blog",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]      
+    }
+  ],
+  "presets": [
+    {
+      "name": "blog",
+      "category": "homepage",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

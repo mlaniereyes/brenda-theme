@@ -1,0 +1,73 @@
+{% for block in section.blocks %}
+  <div class="section1">   
+  
+      <div class="container home-image" style="background-image:url({{block.settings.image | img_url: 'master'}})">
+      
+        <div class="home-section1-title">
+          {{ block.settings.title }}
+        </div>
+        <a class="home-shopping-btn btn" href="{{block.settings.buttonurl}}">{{block.settings.buttontext}}</a>
+      </div>
+     
+  </div>
+{% endfor %}
+
+
+
+
+
+{% schema %}
+{
+  "name": "Brenda Video",
+  "class": "index-section video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "video",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "video url"
+        },
+         {
+          "type": "url",
+          "id": "buttonurl",
+          "label": "button url"
+        },
+         {
+          "type": "text",
+          "id": "buttontext",
+          "label": "button text"
+        }
+      ]      
+    }
+   
+  ],
+  "presets": [
+    {
+      "name": "Brenda Video",
+      "category": "Image",
+      "settings": {
+      },
+      "blocks": [
+        {
+          "type": "video"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
