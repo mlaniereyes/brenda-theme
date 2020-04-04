@@ -176,3 +176,132 @@
   color: white;
   font-size: 40px;
 }
+
+// section 4 view blog
+.section4 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.section4-background-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.section4-col {
+  display: flex;
+}
+.section4-col-item1 {
+  flex: 1 1 50%;
+  display: flex;
+}
+.section4-col-item2 {
+  flex: 1 1 44%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.section4-image2 {
+  margin-top: 28%;
+  margin-left: -7%;
+}
+.section4-image1 {
+  margin-left: 15%;
+}
+.section4-title {
+  margin-bottom: 72px;
+  margin-top: 107px;
+  background-color: #f7f6c5;
+  padding-top: 55px;
+  padding-bottom: 22px;
+  max-width: 1170px;
+  padding-left: 100px;
+  width: 100%;
+  text-align: center;
+}
+.section4-discription {
+  padding: 50px;
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 40px;
+  text-align: justify;
+  letter-spacing: 0.1em;
+}
+.section4-btn {
+  border-radius: 10px;
+  font-family: Nunito;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+// section 5 keep in touch
+
+.section5 .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 120px;
+  margin-bottom: 120px;
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+
+.section4-background-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.section5_email_area {
+  display: flex;
+  width: 35%;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.section5-title {
+  font-family: Overlock;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 49px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section5-discription {
+  font-family: Nunito;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 27px;
+  letter-spacing: 0.1em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.html-text {
+  flex: 1 1 30%;
+  border-radius: 10px;
+  border: 2px solid rgb(21, 115, 179);
+  box-sizing: border-box;
+  color: grey;
+  text-align: center;
+  padding-top: 2%;
+  margin-right: 6%;
+}
+
+.section5-btn {
+  border-radius: 10px;
+  font-family: Nunito;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
