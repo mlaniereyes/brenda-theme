@@ -1,9 +1,9 @@
 
 <div class="section4">
-    <div class="container">
         <h2 class="section4-title">{{section.settings.title}}</h2>
-         <div class="section4-col section4-background-image" style="background-image:url({{block.settings.image_3 | img_url: 'master'}})">
-            {% for block in section.blocks %}
+         <div class="section4-col section4-background-image" style="background-image:url({{section.settings.image_3 | img_url: '1440x500', crop:'center'}})">
+            <div class="container">
+             {% for block in section.blocks %}
                 <div class="section4-col-item1">
                     <div class="section4-image1"><img src="{{block.settings.image_1 | img_url: '372x496', crop:'center'}}"/></div>               
                     <div class="section4-image2"> <img src="{{block.settings.image_2 | img_url: '338x236', crop:'center'}}"/></div>
@@ -28,7 +28,12 @@
       "type": "text",
       "id": "title",
       "label": "title"
-    }
+    },
+    {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "blog background image"
+        }
   ],
   "blocks": [
     {
@@ -45,11 +50,7 @@
           "id": "image_2",
           "label": "blog image 2"
         },
-         {
-          "type": "image_picker",
-          "id": "image_3",
-          "label": "blog background image"
-        },
+         
          {
           "type": "textarea",
           "id": "title",

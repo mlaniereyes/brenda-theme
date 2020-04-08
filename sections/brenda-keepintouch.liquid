@@ -1,6 +1,6 @@
 
 <div class="section5">
-  <div class="container section5-background-image" style="background-image:url({{block.settings.image | img_url: '1024x300', crop:'center'}})">
+  <div class="container section5-background-image" style="background-image:url({{section.settings.image | img_url: '1540x300', crop:'center'}})">
     <h2 class="section5-title">{{ section.settings.title}}</h2>
     {% for block in section.blocks %}
     <div class="section5-discription">{{block.settings.discription}}</div>
@@ -17,8 +17,6 @@
 
 
 
-
-
 {% schema %}
 {
 "name": "Keep in touch",
@@ -28,6 +26,11 @@
     "type": "text",
     "id": "title",
     "label": "title"
+  },
+  {
+    "type": "image_picker",
+    "id": "image",
+    "label": "email image"
   }
 ],
 "blocks": [
@@ -40,11 +43,7 @@
         "id": "title",
         "label": "text"
       },
-      {
-          "type": "image_picker",
-          "id": "image",
-          "label": "email image"
-        },
+   
         {
       "type": "textarea",
       "id": "discription",

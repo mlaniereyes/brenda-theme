@@ -199,6 +199,7 @@
 .section4-background-image {
   background-size: cover;
   background-repeat: no-repeat;
+  margin: 0 calc(50% - 50vw);
 }
 
 .section4-col {
@@ -265,9 +266,11 @@
   padding-bottom: 45px;
 }
 
-.section4-background-image {
+.section5-background-image,
+.section6-background-image {
   background-size: cover;
   background-repeat: no-repeat;
+  margin: 0 calc(50% - 50vw);
 }
 
 .section5_email_area {
@@ -285,6 +288,7 @@
   line-height: 49px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: white;
 }
 
 .section5-discription {
@@ -296,14 +300,15 @@
   letter-spacing: 0.1em;
   margin-top: 20px;
   margin-bottom: 20px;
+  color: white;
 }
 
-.html-text {
+.section5 .html-text {
   flex: 1 1 30%;
   border-radius: 10px;
   border: 2px solid rgb(21, 115, 179);
   box-sizing: border-box;
-  color: grey;
+  color: white;
   text-align: center;
   padding-top: 2%;
   margin-right: 6%;
@@ -357,4 +362,9 @@
   text-transform: capitalize;
   margin-left: 10%;
   margin-top: 50px;
+}
+.section6-col-item,
+.section4-col {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }

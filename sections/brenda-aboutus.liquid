@@ -2,7 +2,7 @@
 <div class="section6">
     <div class="container">
         <h2 class="section6-title">{{section.settings.title}}</h2>
-            <div class="section5-background-image" style="background-image:url({{block.settings.image | img_url: 'master'}})">
+            <div class="section6-background-image" style="background-image:url({{section.settings.image | img_url: '1024x500'}})">
                 {% for block in section.blocks %}
             <div class="section6-col-item">    
                 <div class="section6-discription">{{block.settings.description}}</div>
@@ -29,7 +29,12 @@
       "type": "text",
       "id": "title",
       "label": "Title"
-    }
+    },
+    {
+          "type": "image_picker",
+          "id": "image",
+          "label": "background image"
+        }
   ],
   "blocks": [
     {
@@ -37,11 +42,7 @@
       "name": "about us",
       "settings": [
         
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "background image"
-        },
+        
         {
           "type": "textarea",
           "id": "description",
