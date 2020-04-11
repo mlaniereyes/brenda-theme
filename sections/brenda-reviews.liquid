@@ -1,3 +1,25 @@
+<div class="section7">
+  <div class="container">
+      <div class="section7-col-1">
+        <h2 class="section7-title">{{section.settings.title}}</h2>
+      </div>
+        <div class="section7-col-2 section7-discription">{{section.settings.discription}}</div>
+        <div class="section7-items">
+            {% for block in section.blocks %}   
+            <div class="section7-col-3">    
+                    <img class="section7-stars" src="{{block.settings.image_2 | img_url:'medium'}}">
+                    <div class="section7-name-stars">
+                      <h5  class="section7-name">{{block.settings.review_name}}</h5>
+                       <img class="section7-image" src="{{block.settings.image_1 | img_url:'100x100', crop: 'center'}}">
+                    </div>
+                <div class="section7-des">{{block.settings.title}}</div>
+            </div>
+            {% endfor %}
+        </div>
+  </div>
+</div>
+
+
 {% schema %}
 {
 "name": "reviews",
@@ -7,19 +29,19 @@
     "type": "text",
     "id": "title",
     "label": "title"
-}
+},
+ {
+    "type": "textarea",
+    "id": "discription",
+    "label": "title discription"
+}   
 ],
 "blocks": [
 {
     "type": "text",
     "name": "reviews",
     "settings": [
-    {
-    "type": "textarea",
-    "id": "discription",
-    "label": "discription"
-},   
-    
+
         {
     "type": "text",
     "id": "review_name",
@@ -38,7 +60,7 @@
         {
         "type": "textarea",
         "id": "title",
-        "label": "discription"       
+        "label": "reviews discription"       
         }
     ]      
 }

@@ -34,6 +34,14 @@
 
     {% for block in section.blocks %}
       {% case block.type %}
+      {% comment %} add code here brenda {% endcomment %}
+      {% when 'footer_logo' %}
+      <div>
+          <img class="footer-logo-image" src="{{block.settings.footer_logo | img_url:'100x100', crop: 'center'}}"/>
+          <img class="footer-twitter" src="{{block.settings.footer_twitter | img_url:'20x20', crop: 'center'}}"/>
+          <img class="footer-instegram" src="{{block.settings.footer_instegram| img_url:'20x20', crop: 'center'}}"/>
+          <img class="footer-facebook" src="{{block.settings.footer_facebook | img_url:'20x20', crop: 'center'}}"/>
+      </div>
         {% when 'blog' %}
           <div class="grid__item {{ column_width }} site-footer__links">
             {% assign blog = blogs[block.settings.blog] %}
@@ -547,6 +555,45 @@
           }
         }
       ]
+    },
+     {
+      "type": "footer_logo",
+      "name": "footer logo",
+      "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "title"
+      }
+      ],
+      "blocks": [          
+        {
+          "type": "image_picker",
+          "id": "footer_logo",
+          "label": "footer logo"
+        },
+         {
+          "type": "image_picker",
+          "id": "footer_twitter",
+          "label": "footer twitter"
+        },
+         {
+          "type": "image_picker",
+          "id": "footer_instegram",
+          "label": "footer instegram"
+        },
+        {
+          "type": "image_picker",
+          "id": "footer_facebook",
+          "label": "footer facebook"
+        },
+        {
+          "type": "image_picker",
+          "id": "footer_payment",
+          "label": "footer payment"
+        }
+      ] 
+       
     }
   ]
 }

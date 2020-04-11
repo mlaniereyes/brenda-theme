@@ -22,6 +22,7 @@
               {{ link.title | escape }}
               <span class="icon icon-arrow-down" aria-hidden="true"></span>
           </a>
+
           <ul
             id="MenuParent-{{ parent_index }}"
             class="site-nav__dropdown {% if link.levels == 2 %}site-nav--has-grandchildren{% endif %}"
@@ -85,7 +86,23 @@
               {{ link.title | escape }}
           </a>
         </li>
+
       {% endif %}
     {% endfor %}
+       
+          <li class="nav-search">
+          <div class="nav-item1">
+            <img class="nav-search-icon" src="{{'search-solid.svg' | file_url}}">
+            <input class="nav-search-text" type="text" placeholder="search..."/>
+          </div>
+            <button class= "nav-search-btn" type="button">Search</button>    
+          </li>
+          <li>
+            <a href="{{ link.url }}" class="nav-account"><img src="{{'account.svg' | file_url}}"></a> 
+          </li>
+          <li>
+            <a href="{{ link.url }}" class="nav-shopping-cart"><img src="{{'shopping_cart.svg' | file_url}}"></a> 
+          </li>
+      
   </ul>
 </nav>
