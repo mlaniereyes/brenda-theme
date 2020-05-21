@@ -23,6 +23,7 @@
             min-width: 100%;
           {% endif %}
         }
+      
       }
     </style>
   {% endif %}
@@ -191,12 +192,67 @@
           {%- endif -%}
 
           {% form 'product', product, class:productform_class %}
+          {% comment %} find index of this specific color option {% endcomment %}
+            {% assign color_index = 0 %}
+            {% assign size_index = 0 %}
+            {% for option in product.options %}
+              {% assign color_option =  option |  downcase %}
+              {% assign size_option =  option |  downcase %}
+              {% if color_option == 'color' %}
+                {% assign color_index = forloop.index0 %}     
+                 {% endif %}
+                 {% if size_option == 'size' %}
+                {% assign size_index = forloop.index0 %}                   
+              {% endif %}
+            {% endfor %}
+
+            {% comment %} Find unique value, change to string, add unique onw and then change back to array by split, and display it {% endcomment %}
+              Size:
+              <div style="display:block;">
+                {% assign size_values = '' %}
+                 {% assign color_values = '' %}
+                 {% assign size_swatch = '' %}
+                  {% assign color_swatch = '' %}
+
+                {% for variant in product.variants %}
+                  {% assign size_value = variant.options[size_index] %}
+                  {% assign color_value = variant.options[color_index] %}
+                   {% unless size_values contains size_value %}                   
+                    {% assign size_values= size_values | join: ',' %}	     
+                    {% assign size_values = size_values | append: ',' | append: size_value  %} 	                       					
+                    {% assign size_values = size_values | split: ',' %}                
+										 {% capture size_link %}
+                    	<a href="#" class="size-option" value="{{size_value }}"  data-size-value="{{size_value}}">{{size_value}}</a>
+                      {% endcapture%}    
+                      {% assign size_swatch = size_swatch | append: size_link %}    
+                      {% endunless %}    
+                  
+                    {% unless color_values contains color_value %}
+                    {% assign color_values = color_values | join: ',' %}	                     
+                    {% assign color_values = color_values | append: ',' | append: color_value %} 		          					
+                    {% assign color_values =color_values | split: ',' %}
+                        {% capture color_link %}
+                      <div class="color-option-border" style="display:inline-block;">                     
+										  	<a href="#" class="color-option" style="background-color:{{color_value}};" data-value="{{color_value}}"></a>
+                      </div>
+                       {% endcapture%}  
+                      {% assign color_swatch = color_swatch | append: color_link %}    
+                      {% endunless %}
+                {% endfor %}
+                      {{size_swatch}}
+                      <br>
+                      Color:
+                      <br>
+                      {{color_swatch}}
+               </div>
+              
+               
+
+
             <select name="id" id="ProductSelect-{{ section.id }}" class="product-single__variants">
               {% for variant in product.variants %}
                 {% if variant.available %}
-
                   <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
-
                 {% else %}
                   <option disabled="disabled">
                     {{ variant.title }} - {{ 'products.product.sold_out' | t }}
@@ -204,6 +260,25 @@
                 {% endif %}
               {% endfor %}
             </select>
+            {% comment %} This is for link swatch to the selector {% endcomment %}
+            <script>
+            $('.color-option').on('click', function(e){
+              e.preventDefault();
+              var selectValue = $(this).attr("data-value");
+              $('#ProductSelect-product-template-option-{{color_index}}').val(selectValue).trigger('change');
+            })
+          
+            $('.size-option').on('click', function(e){
+              e.preventDefault();
+              $(this).addClass('active');
+              $(this).siblings().removeClass('active');
+              var selectValue = $(this).attr("data-size-value");
+              $('#ProductSelect-product-template-option-{{size_index}}').val(selectValue).trigger('change');             
+            })
+
+            </script>
+         
+
 
             <div class="product-single__quantity{% unless section.settings.product_quantity_enable %} is-hidden{% endunless %}">
               <label for="Quantity">{{ 'products.product.quantity' | t }}</label>

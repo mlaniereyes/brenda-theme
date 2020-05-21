@@ -1,8 +1,11 @@
 {% for block in section.blocks %}
   <div class="section1">   
   
-      <div class="container home-image" style="background-image:url({{block.settings.image | img_url: '1441x888', crop:'center'}})">
-      
+      <div class="container home-image">
+          <video class="background-video" width="100%" height="auto" loop autoplay>
+          <source src="{{'dress1-cut2.mp4' | file_url}}" type="video/mp4">    
+          Your browser does not support the video tag.
+          </video>
         <div class="home-section1-title">
           {{ block.settings.title }}
         </div>
@@ -11,7 +14,6 @@
      
   </div>
 {% endfor %}
-
 
 
 
